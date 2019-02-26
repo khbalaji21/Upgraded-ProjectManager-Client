@@ -1,0 +1,91 @@
+<form novalidate #frm="ngForm" (ngSubmit)="onSubmit(frm.value, AddEdit)">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
+            <div class="col-sm-10">
+              <input id="first_name" name="first_name" type="text" class="form-control"
+                     placeholder="First Name" required #FirstName="ngModel" ngModel
+                     [(ngModel)]="user.first_name" />
+              <div *ngIf="FirstName.errors?.required && FirstName.touched" class="error">
+                First Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="last_name" class="col-sm-2 col-form-label">Last Name:</label>
+            <div class="col-sm-10">
+              <input id="last_name" name="last_name" type="text" class="form-control"
+                     placeholder="Last Name" required #LastName="ngModel" ngModel
+                     [(ngModel)]="user.last_name" />
+              <div *ngIf="LastName.errors?.required && LastName.touched" class="error">
+                Last Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="employee_id" class="col-sm-2 col-form-label">Employee ID:</label>
+            <div class="col-sm-10">
+              <input id="employee_id" name="employee_id" type="text" class="form-control"
+                     placeholder="Employee ID" required #EmployeeID="ngModel" ngModel
+                     [(ngModel)]="user.employee_id" />
+              <div *ngIf="EmployeeID.errors?.required && EmployeeID.touched" class="error">
+                Employee ID is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button id="add_edit" name="add_edit" type="submit" class="btn btn-primary"
+                  [disabled]="frm.invalid" #AddEdit>Add User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<hr />
+<div id="searchdiv" class="container">
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <input id="searchUser" name="searchUser" type="text" class="form-control"
+             placeholder="Search User" [(ngModel)]="searchText" />
+    </div>
+    <div class="col-sm-8" style="text-align:right;">
+      <label class="col-form-label">
+        Sort by:
+      </label>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">First Name</button>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">Last Name</button>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">ID</button>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="UsersList">
+  <div *ngFor="let user of userAPI">
+    <table class=".table">
+      <tr>
+        <td width="200px">
+          <span class="label label-default">{{user.first_name}}</span>&nbsp;
+          <span class="label label-default">{{user.last_name}}</span>
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-warning" (click)="edit(user, AddEdit)"
+                  >Edit</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="label label-default">{{user.employee_id}}</span>&nbsp;&nbsp;
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-danger" (click)="delete(user)"
+                  >Delete</button>
+        </td>
+      </tr>
+    </table>
+    <hr />
+  </div>
+</div>

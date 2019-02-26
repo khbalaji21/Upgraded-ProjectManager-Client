@@ -1,0 +1,92 @@
+<form novalidate #frm="ngForm" (ngSubmit)="onSubmit(frm.value, AddEdit)">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="project_name" class="col-sm-2 col-form-label">Project:</label>
+            <div class="col-sm-10">
+              <input id="project_name" name="project_name" type="text" class="form-control"
+                     placeholder="Project Name" required #ProjectName="ngModel" ngModel
+                     [(ngModel)]="project.name" />
+              <div *ngIf="ProjectName.errors?.required && ProjectName.touched" class="error">
+                Project Name is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label id="chkbox_lbl">
+              <input id="chkbox" name="chkbox" type="checkbox"
+                     (change)="DateIndic($event.target.checked)" />
+              Start Date & End Date
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="start_date" class="col-sm-2 col-form-label">Start Date:</label>
+            <div class="col-sm-10">
+              <input id="start_date" name="start_date" type="date" class="form-control col-sm-4"
+                     #StartDate="ngModel" ngModel [(ngModel)]="project.start_date"
+                     [disabled]="!chkd" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="end_date" class="col-sm-2 col-form-label">End Date:</label>
+            <div class="col-sm-10">
+              <input id="end_date" name="end_date" type="date" class="form-control col-sm-4"
+                     #EndDate="ngModel" ngModel [(ngModel)]="project.end_date"
+                     [disabled]="!chkd" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="priority" class="col-sm-2 col-form-label">Priority:</label>
+            <div class="col-sm-10">
+              <input id="projectpriority" type="range" value="0" max="30" min="0"
+                     oninput="rangeOp.value=projectpriority.value" class="form-control" required
+                     #Priority ngModel>
+              <div *ngIf="Priority.touched && Priority.value==0" class="error">
+                Assign Priority to the project
+              </div>
+              <output id="rangeOp">0</output>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="manager" class="col-sm-2 col-form-label">Manager:</label>
+            <div class="col-sm-10">
+              <input id="manager" name="manager" type="text" class="form-control"
+                     placeholder="Manager Name" required #Manager="ngModel" ngModel
+                     [(ngModel)]="project.manager_id" />
+              <div *ngIf="Manager.errors?.required && Manager.touched" class="error">
+                Manager Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button id="add_edit" name="add_edit" type="submit" class="btn btn-primary"
+                  [disabled]="frm.invalid" #AddEdit>
+            Add Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<hr />
+<div id="searchdiv" class="container">
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <input id="searchProject" name="searchProject" type="text" class="form-control"
+             placeholder="Search Project" [(ngModel)]="searchText" />
+    </div>
+    <div class="col-sm-8" style="text-align:right;">
+      <label class="col-form-label">
+        Sort by:
+      </label>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">Project Name</button>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">Priority</button>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">Start Date</button>&nbsp;
+      <button type="button" class="btn btn-outline-secondary">End Date</button>
+    </div>
+  </div>
+</div>
+<hr />

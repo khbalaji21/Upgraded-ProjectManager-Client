@@ -1,0 +1,29 @@
+.card {
+  width: 800px;
+  /*padding: 10px 10px 10px 10px;*/
+  /*margin: 50px 50px 50px 50px;*/
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  text-align: right;
+}
+
+input {
+  /*margin-top: 5px;
+  margin-bottom: 5px;*/
+}
+
+.UsersList {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 300px;
+}
+
+.UsersList button {
+  min-width: 70px;
+}
